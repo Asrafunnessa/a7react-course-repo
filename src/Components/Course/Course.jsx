@@ -9,7 +9,7 @@ const Course = ({selectedCourses}) => {
         <div>
             <h1 className="txt-4xl font-bold">Course Name</h1>
             {selectedCourses.map((courses) => (
-                <li>{courses.course_name}</li>
+                <li key={courses.id}>{courses.course_name}</li>
             ))}
             <h5>Total Credit Hour: </h5>
         </div>

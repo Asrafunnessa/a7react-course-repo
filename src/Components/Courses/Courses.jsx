@@ -17,9 +17,23 @@ const Courses = () => {
     }, [])
 
     const handleSelectCourses = (courses) => {
-        setSelectedCourses([...selectedCourses, courses]);
+        const isExist = selectedCourses.find(item => item.id ==
+        courses.id);
+        let count = courses.credit;
+
+        if(isExist ){
+             return alert("already selected");
+        }
+        else{
+
+            selectedCourses.forEach((item) => {
+                count = count + item.credit;
+            });
+             console.log(count);
+            setSelectedCourses([...selectedCourses, courses]);
+        }
     };
-    console.log(selectedCourses);
+    
 
     return (
         <div className="container">
@@ -35,7 +49,7 @@ const Courses = () => {
                  <p><small>{courses.details}</small></p>
                  <div className="info">
                     <p>$ Price:{courses.price}</p>
-                    <p>Credit:{courses.credit}</p>
+                    <p>Credit:{courses.credit} hr</p>
                  </div>
                 <button onClick={()=>handleSelectCourses(courses)} className="card-btn">Select</button>
               </div>
