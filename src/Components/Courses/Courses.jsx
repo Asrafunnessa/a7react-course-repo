@@ -3,10 +3,12 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import './Courses.css';
+import Course from "../Course/Course";
 
 const Courses = () => {
 
     const [allCourses, setAllCourses] = useState([]);
+    const [selectedCourses, setSelectedCourses] = useState([]);
 
     useEffect(() =>{
         fetch(`data.json`)
@@ -14,7 +16,10 @@ const Courses = () => {
         .then(data => setAllCourses(data))
     }, [])
 
-    console.log(allCourses);
+    const handleSelectCourses = (courses) => {
+        setSelectedCourses([...selectedCourses, courses]);
+    };
+    console.log(selectedCourses);
 
     return (
         <div className="container">
@@ -32,13 +37,13 @@ const Courses = () => {
                     <p>$ Price:{courses.price}</p>
                     <p>Credit:{courses.credit}</p>
                  </div>
-                 <button className="card-btn">Select</button>
+                <button onClick={()=>handleSelectCourses(courses)} className="card-btn">Select</button>
               </div>
                 ))
               }
               </div>
                <div className="cart">
-                <h1>this is cart</h1>
+                <Course selectedCourses={selectedCourses}></Course>
                </div>
             </div>
         </div>
