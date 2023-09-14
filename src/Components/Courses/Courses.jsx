@@ -9,6 +9,8 @@ const Courses = () => {
 
     const [allCourses, setAllCourses] = useState([]);
     const [selectedCourses, setSelectedCourses] = useState([]);
+    const [remaining, setRemaining] = useState(0);
+    const [totalHour, setTotalHour] = useState(0);
 
     useEffect(() =>{
         fetch(`data.json`)
@@ -29,7 +31,11 @@ const Courses = () => {
             selectedCourses.forEach((item) => {
                 count = count + item.credit;
             });
-             console.log(count);
+
+             const totalRemaining = 20-count;
+             setTotalHour(count);
+             setRemaining(totalRemaining);
+
             setSelectedCourses([...selectedCourses, courses]);
         }
     };
@@ -57,7 +63,10 @@ const Courses = () => {
               }
               </div>
                <div className="cart">
-                <Course selectedCourses={selectedCourses}></Course>
+                <Course 
+                 selectedCourses={selectedCourses}
+                 remaining={remaining}
+                  totalHour={totalHour}></Course>
                </div>
             </div>
         </div>
