@@ -4,12 +4,15 @@ import { useEffect } from "react";
 import { useState } from "react";
 import './Courses.css';
 import Course from "../Course/Course";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Courses = () => {
 
     const [allCourses, setAllCourses] = useState([]);
     const [selectedCourses, setSelectedCourses] = useState([]);
-    const [remaining, setRemaining] = useState(0);
+    const [remaining, setRemaining] = useState(20);
     const [totalHour, setTotalHour] = useState(0);
 
     useEffect(() =>{
@@ -24,7 +27,8 @@ const Courses = () => {
         let count = courses.credit;
 
         if(isExist ){
-             return alert("already selected");
+             return toast.error("already selected",{ autoClose: 1000,
+             hideProgressBar: true});
         }
         else{
 
@@ -34,7 +38,7 @@ const Courses = () => {
 
              const totalRemaining = 20-count;
              if(count > 20){
-                 return alert('There are no remaining credit hour');
+                 return toast.warning('There are no remaining credit hour',{ autoClose: 1000});
              }
              else{
                 setTotalHour(count);
@@ -74,6 +78,7 @@ const Courses = () => {
                   totalHour={totalHour}></Course>
                </div>
             </div>
+            <ToastContainer />
         </div>
     );
 };
