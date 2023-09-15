@@ -33,10 +33,15 @@ const Courses = () => {
             });
 
              const totalRemaining = 20-count;
-             setTotalHour(count);
-             setRemaining(totalRemaining);
-
-            setSelectedCourses([...selectedCourses, courses]);
+             if(count > 20){
+                 return alert('There are no remaining credit hour');
+             }
+             else{
+                setTotalHour(count);
+                setRemaining(totalRemaining);
+                setSelectedCourses([...selectedCourses, courses]);
+             }
+             
         }
     };
     
